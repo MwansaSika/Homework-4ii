@@ -1,0 +1,82 @@
+#include<iostream>
+#include<string>
+using namespace std;
+
+class Ship
+{
+private:
+	string NameofShip;
+	string ShipYearBuilt;
+
+public:
+	Ship(string name, string yearBuilt)
+	{
+		NameofShip = name;
+		ShipYearBuilt = yearBuilt;
+	}
+
+	string getname()
+	{
+		return NameofShip;
+	}
+
+	string getbuilt()
+	{
+		return ShipYearBuilt;
+	}
+
+	virtual void print()
+	{
+		cout << "Ship's Name:" << getname() << " and Year built:" << getbuilt() << endl; //Display output
+	}
+};
+
+class CruiseShip :public Ship
+{
+private:
+	int passengers;
+public:
+	CruiseShip(string n, string y, int p) : Ship(n, y)
+	{
+		passengers = p;
+	}
+
+	virtual void print()
+	{
+		cout << "\nThis is a big " << getname() 
+			<< " and has a capacity of " << passengers << "passengers\n" << endl;
+	}
+};
+
+class CargoShip :public Ship
+{
+private:
+	int tonnage;
+public:
+	CargoShip(string n, string y, int t) : Ship(n, y)
+	{
+		tonnage = t;
+	}
+
+	virtual void print()
+	{
+		cout << "Ship's Name:" << getname() << "\nCapacity:" << tonnage << " tonnage" << endl; //Display output
+	}
+};
+
+int main() //Where the program starts
+{
+	int i;
+	Ship *ships[3] = { new Ship("CruiseShip", "2009"),
+
+		new CruiseShip("Ship","2012",1900),
+		new CargoShip("Cargo","2013",3500)
+	};
+	//For LOOP
+	for (i = 0; i<3; i++)
+		ships[i]->print();
+	
+	system("pause");
+	return 0;
+
+}
